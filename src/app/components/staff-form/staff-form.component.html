@@ -1,0 +1,61 @@
+<br>
+<div class="container">
+<button (click)="doShowList()" class="btn btn-sm btn-success">Staff List</button>
+<button (click)="doShowNewStaff()" class="btn btn-sm btn-warning">New Staff</button>
+<br><br>
+</div>
+<div [hidden]="showlist" class="container">
+<table class="table table-condensed">
+    <tr class="active">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Department</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr *ngFor="let staff of staffs;let i = index">
+        <td>{{staff.id}} - {{i}}</td>
+        <td>{{staff.name}}</td>
+        <td>{{staff.age}}</td>
+        <td>{{staff.department}}</td>     
+        <td><button class="btn btn-xs btn-info"
+            (click)="doShowEditStaff(i)"
+            >Edit</button></td>
+        <td><button class="btn btn-xs btn-danger"
+            (click)="deleteStaff(i)" 
+            >Delete</button></td>
+    </tr>
+</table>
+</div>    
+ 
+<div [hidden]="newstaff" class="container">
+  <div>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control input-sm" id="name"
+            required [(ngModel)]="staff.name" name="name" >
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="text" class="form-control input-sm" id="age"
+            [(ngModel)]="staff.age" name="age">
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <select class="form-control input-sm" id="department"
+            required [(ngModel)]="staff.department" name="department">
+          <option *ngFor="let department of departments"
+          [value]="department">{{department}}</option>
+        </select>
+      </div>
+      <button type="button" class="btn btn-sm btn-success"
+        (click)="doSubmitStaff()"
+        >Submit</button>
+      <button type="button" class="btn btn-sm btn-danger"
+        (click)="doShowList()" 
+        >Cancel</button>
+    </form>
+  </div>
+</div>
